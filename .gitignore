@@ -1,0 +1,6 @@
+# libs
+nome_modules/
+
+
+# env
+.env
