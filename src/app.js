@@ -1,12 +1,11 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { env } from 'node:process';
+import env from './config.js';
 
 // --------------------------------------------
 // Configs
 // --------------------------------------------
 
-// env
 const { HOSTNAME, PORT } = env;
 
 const app = express();
@@ -31,8 +30,6 @@ app.use('/api/v1', apiRoutesV1);
 // --------------------------------------------
 // Server
 // --------------------------------------------
-
-// Server start
 app.listen(PORT, HOSTNAME, () => {
     console.log(`Server running at http://${HOSTNAME}:${PORT}/`);
 })
