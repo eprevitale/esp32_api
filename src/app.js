@@ -1,8 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import { env } from 'node:process';
 
-const hostname = '127.0.0.1';
-const port = 3000;
+// --------------------------------------------
+// Configs
+// --------------------------------------------
+
+// env
+const { HOSTNAME, PORT } = env;
 
 const app = express();
 
@@ -12,13 +17,22 @@ app.use(bodyParser.urlencoded({
 }));
 
 
-// Import routes
+// --------------------------------------------
+// Routing
+// --------------------------------------------
 
+// Import routes
+import apiRoutesV1 from './config/apiRoutesV1.js';
 
 // Set routes
+app.use('/api/v1', apiRoutesV1);
 
+
+// --------------------------------------------
+// Server
+// --------------------------------------------
 
 // Server start
-app.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
+app.listen(PORT, HOSTNAME, () => {
+    console.log(`Server running at http://${HOSTNAME}:${PORT}/`);
 })
