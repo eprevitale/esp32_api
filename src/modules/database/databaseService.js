@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { isMongoObjectId } from "../utils/utils";
 
 const databaseService = {}
