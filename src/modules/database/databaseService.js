@@ -6,6 +6,8 @@ const databaseService = {}
 // -------------------------------------------------------------------------- //
 // CRUD
 // -------------------------------------------------------------------------- //
+
+// Create
 databaseService.create = async(data, options) => {
     const { model } = options;
     const doc = new model(data);
@@ -15,25 +17,29 @@ databaseService.create = async(data, options) => {
 }
 
 
+// Read
 databaseService.read = async(condition = {}, options) => {
     const { model } = options;
     if (isMongoObjectId(condition)) {
-        data = await model.findById(condition); // find by ObjectId
+        var data = await model.findById(condition); // find by ObjectId
     } else {
-        data = await model.find(condition); // find all
+        var data = await model.find(condition); // find all
     }
     return data;
 }
 
 
-databaseService.update = async() => {
-    
+// Update
+databaseService.update = async(data, condition, options) => {
+    const { model } = options;
+    if (isMongoObjectId(condition) && model.exists(condition)) {
+        const updated = await model.findByIdAndUpdate(condition, data, options);
+        return updated;
+    }
+    return false;
 }
 
 
-databaseService.delete = async() => {
-    
-}
 
 // -------------------------------------------------------------------------- //
 // Exports
