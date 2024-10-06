@@ -40,6 +40,21 @@ databaseService.update = async(data, condition, options) => {
 }
 
 
+// Delete
+databaseService.deleteOne = async(condition, options) => {
+    const { model } = options;
+    if (isMongoObjectId(condition) && model.exists(condition)) {
+        const deleted = await model.deleteOne(condition);
+        return deleted;
+    }
+    return false;
+}
+
+databaseService.deleteMany = async(condition, options) => {
+    const { model } = options;
+    const deleted = await model.deleteMany(condition);
+    return deleted
+}
 
 // -------------------------------------------------------------------------- //
 // Exports
