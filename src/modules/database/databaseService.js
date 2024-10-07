@@ -1,4 +1,4 @@
-import { isMongoObjectId } from "../utils/utils";
+import { isMongoObjectId } from "../utils/utils.js";
 
 const databaseService = {}
 

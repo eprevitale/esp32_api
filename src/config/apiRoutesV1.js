@@ -1,5 +1,5 @@
 import { Router } from "express";
-import sensorDataRoutesV1 from '../modules/sensorData/sensorDataRoutesV1.js';
+import sensorDataRoutesV1 from '../modules/sensorData/sensorDataRoutes.js';
 
 const router = Router();
 

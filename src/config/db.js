@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import env from '../config';
+import env from '../config.js';
 
 const { MONGO_URL, MONGO_DB_NAME } = env;
 
@@ -13,4 +13,4 @@ db.on('disconnected', () => { console.log("Disconnected from database.") });
 db.on('reconnected', () => { console.log("Reconnected to database.") });
 db.on('close', () => { console.log("Connection closed.") });
 
-await mongoose.connect(MONGO_URL + MONGO_DB_NAME);
+mongoose.connect(MONGO_URL + MONGO_DB_NAME);

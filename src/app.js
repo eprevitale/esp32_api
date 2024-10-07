@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import env from './config.js';
-import db from './config/db.js'
+import './config/db.js'
 
 // --------------------------------------------
 // Configs
@@ -24,12 +24,6 @@ import apiRoutesV1 from './config/apiRoutesV1.js';
 
 // Set routes
 app.use('/api/v1', apiRoutesV1);
-
-
-// --------------------------------------------
-// Database
-// --------------------------------------------
-await db.connect(MONGO_URL);
 
 
 // --------------------------------------------
