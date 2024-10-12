@@ -24,17 +24,24 @@ const getAllSensorData = async(req, res) => {
 
 // POST
 const postSensorData = async(req, res) => {
-    const { h, i, t, l, f, v } = req.body; // timestamp, sensorID, temperature, level, flow rate, volume
-    if(!h || !i || !t || !l || !f || !v) {
+    const { 
+        timestamp,
+        sensorId,
+        temperature,
+        level,
+        flowRate,
+        volume
+     } = req.body;
+    if(!timestamp || !sensorId || !temperature || !level || !flowRate || !volume) {
         var resStatus = 400;
-        var json = { "message": "Insuficient parameters in the body. Please review the request." };
+        var json = { "message": "Insufficient parameters in the body. Please review the request." };
     } else {
-        const doc = await sensorDataService.create({ h, i, t, l, f, v });
+        const data = req.body;
+        const doc = await sensorDataService.create(data);
         var resStatus = 201;
         var json = doc;
         console.log(resStatus, json);
     }
-    // TODO move verification to the service layer 
     res.status(resStatus).send(json);
 }
 
