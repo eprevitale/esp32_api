@@ -1,5 +1,6 @@
 import SensorData from "./sensorDataModel.js";
 import databaseService from "../database/databaseService.js";
+import SaveOptions from "mongoose/lib/options/saveOptions.js";
 
 const sensorDataService = {}
 
@@ -9,18 +10,9 @@ const sensorDataService = {}
 
 // Create
 sensorDataService.create = async(data) => {
-    const { h, i, t, l, f, v } = data;
-    const newData = new SensorData(
-        {
-            timestamp: h,
-            sensorId: i,
-            temperature: t,
-            level: l,
-            flowRate: f,
-            volume: v
-        }
-    )
-    const doc = await databaseService.create(data, newData);
+    let options = {};
+    options.model = SensorData;
+    const doc = await databaseService.create(data, options);
     return doc;
 }
 

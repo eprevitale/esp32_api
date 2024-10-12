@@ -34,6 +34,7 @@ const postSensorData = async(req, res) => {
         var json = doc;
         console.log(resStatus, json);
     }
+    // TODO move verification to the service layer 
     res.status(resStatus).send(json);
 }
 

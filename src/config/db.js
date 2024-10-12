@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 import env from '../config.js';
+import SaveOptions from "mongoose/lib/options/saveOptions.js";
 
-const { MONGO_URL, MONGO_DB_NAME } = env;
+const { MONGO_URL, MONGO_DB_NAME, MONGO_COLLECTION_NAME } = env;
 
 const db = mongoose.connection;
 
@@ -13,4 +14,6 @@ db.on('disconnected', () => { console.log("Disconnected from database.") });
 db.on('reconnected', () => { console.log("Reconnected to database.") });
 db.on('close', () => { console.log("Connection closed.") });
 
-mongoose.connect(MONGO_URL + MONGO_DB_NAME);
+let options = {};
+options.dbName = MONGO_COLLECTION_NAME
+await mongoose.connect(MONGO_URL + MONGO_DB_NAME, options );

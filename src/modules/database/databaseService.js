@@ -9,6 +9,7 @@ const databaseService = {}
 // Create
 databaseService.create = async(data, options) => {
     const { model } = options;
+    console.log(data)
     const doc = new model(data);
     await doc.save();
 
