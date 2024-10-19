@@ -20,11 +20,18 @@ databaseService.create = async(data, options) => {
 // Read
 databaseService.read = async(condition = {}, options) => {
     const { model } = options;
-    if (isMongoObjectId(condition)) {
-        var data = await model.findById(condition); // find by ObjectId
-    } else {
-        var data = await model.find(condition); // find all
-    }
+
+    const data = await model.find(condition);
+
+    return data;
+}
+
+
+databaseService.readOne = async(condition = {}, options) => {
+    const { model } = options;
+
+    const data = await model.findOne(condition);
+
     return data;
 }
 
