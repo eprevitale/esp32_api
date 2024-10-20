@@ -1,7 +1,8 @@
 import SensorData from "./sensorDataModel.js";
-import databaseService from "../database/databaseService.js";
+import { isValidObjectId, MongooseError } from "mongoose";
 
 const sensorDataService = {}
+
 
 // -------------------------------------------------------------------------- //
 // CRUD
@@ -9,26 +10,38 @@ const sensorDataService = {}
 
 // Create
 sensorDataService.create = async (data) => {
-    let options = {};
-    options.model = SensorData;
-    const doc = await databaseService.create(data, options);
-    return doc;
+    // let options = {};
+    // options.model = SensorData;
+    try {
+        const doc = await SensorData.create(data);
+        return doc;
+    } catch (error) {
+        throw new MongooseError(`Unable to create document: ${error}`);
+    }
 }
 
 
 sensorDataService.read = async () => {
-    let options = {};
-    options.model = SensorData;
-    const doc = databaseService.read({}, options);
-    return doc;
+    try {
+        const doc = SensorData.find();
+        return doc;
+    } catch (error) {
+        throw new MongooseError(`Unable to read documents: ${error}`);
+    }
+    
 }
 
 
 sensorDataService.readById = async (id) => {
-    let options = {};
-    options.model = SensorData;
-    const doc = databaseService.readOne({ _id: id }, options);
-    return doc;
+    try {
+        if(!isValidObjectId) {
+            throw new MongooseError(`Invalid ID.`);
+        }
+        const doc = SensorData.findById(id);
+        return doc;
+    } catch (error) {
+        throw new Error(`Unable to read documents: ${error}`)
+    }
 }
 
 

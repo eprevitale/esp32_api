@@ -1,3 +1,4 @@
+import { MongooseError } from "mongoose";
 import sensorDataService from "./sensorDataService.js";
 
 // -------------------------------------------------------------------------- //
@@ -26,14 +27,25 @@ sensorDataController.getSingleSensorData = async (req, res) => {
 
     const { id } = req.params;
 
-    const doc = await sensorDataService.readById( id );
+    try {
+        const doc = await sensorDataService.readById(id);
 
-    if(!doc) {
-        res.status(404).json({ msg: "No registries found." });
-        return;
+        if(!doc) {
+            res.status(404).json({ msg: "No registries found." });
+            return;
+        }
+    
+        res.status(200).json(doc)
+
+    } catch (error) {
+        if(error instanceof MongooseError) {
+            res.status(422).json({ msg: "Invalid ID." });
+            return;
+        } else {
+            res.status(400).json({ msg: "Invalid request." });
+            return;
+        }
     }
-
-    res.status(200).json(doc)
 }
 
 
@@ -73,13 +85,26 @@ sensorDataController.postSensorData = async (req, res) => {
         return;
      }
 
-    const data = req.body;
-    const doc = await sensorDataService.create(data);
+    const data = { 
+        timestamp,
+        sensorId,
+        temperature,
+        level,
+        flowRate,
+        volume
+     };
 
-    res.status(201).json({
-        msg: "Object created successfully.",
-        doc
-    });
+    try {
+
+        const doc = await sensorDataService.create(data);
+        res.status(201).json({
+            msg: "Object created successfully.",
+            doc
+        });
+
+    } catch (error) {
+        res.status(500).json({ msg: "Unable to create document." })
+    }
 }
 
 
