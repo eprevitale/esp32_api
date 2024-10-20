@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({
 import apiRoutesV1 from './config/apiRoutesV1.js';
 
 // Set routes
-app.use('/api/v1', apiRoutesV1);
+app.use('/', apiRoutesV1);
 
 
 // --------------------------------------------
