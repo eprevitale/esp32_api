@@ -3,10 +3,17 @@ import sensorDataController from './sensorDataController.js';
 
 const router = Router();
 
-router.get('/', sensorDataController.getAllSensorData);
 
-router.get('/:id', sensorDataController.getSingleSensorData);
+// ----------------------------------------------------------------------- //
+// Routes
+// ----------------------------------------------------------------------- //
 
-router.post('/', sensorDataController.postSensorData);
+router.get('/', sensorDataController.read);
+
+router.get('/:id', sensorDataController.readById);
+
+router.post('/', sensorDataController.create);
+
+
 
 export default router;

@@ -9,7 +9,7 @@ const sensorDataController = {}
 
 
 // GET
-sensorDataController.getAllSensorData = async (req, res) => {
+sensorDataController.read = async (req, res) => {
     
     const doc = await sensorDataService.read();
 
@@ -23,7 +23,7 @@ sensorDataController.getAllSensorData = async (req, res) => {
 
 
 // GET :id
-sensorDataController.getSingleSensorData = async (req, res) => {
+sensorDataController.readById = async (req, res) => {
 
     const { id } = req.params;
 
@@ -38,6 +38,7 @@ sensorDataController.getSingleSensorData = async (req, res) => {
         res.status(200).json(doc)
 
     } catch (error) {
+        
         if(error instanceof MongooseError) {
             res.status(422).json({ msg: "Invalid ID." });
             return;
@@ -50,7 +51,7 @@ sensorDataController.getSingleSensorData = async (req, res) => {
 
 
 // POST
-sensorDataController.postSensorData = async (req, res) => {
+sensorDataController.create = async (req, res) => {
     const { 
         timestamp,
         sensorId,
