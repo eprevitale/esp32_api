@@ -7,7 +7,7 @@ import './config/db.js'
 // Configs
 // --------------------------------------------
 
-const { HOSTNAME, PORT, MONGO_URL } = env;
+const { HOSTNAME, PORT } = env;
 
 const app = express();
 
