@@ -10,8 +10,6 @@ const sensorDataService = {}
 
 // Create
 sensorDataService.create = async (data) => {
-    // let options = {};
-    // options.model = SensorData;
     try {
         const doc = await SensorData.create(data);
         return doc;
