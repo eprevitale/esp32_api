@@ -11,6 +11,13 @@ import { MongooseError } from "mongoose";
 const userService = {};
 
 
+// Auxiliary function
+userService.isEmailAlreadyRegistered = async (email) => {
+    const search = await User.findOne({ email: email });
+    return search !== null;
+}
+
+
 userService.create = async (name, lastName, email, password) => {
 
     if (!isValidName(name)) {
@@ -21,6 +28,9 @@ userService.create = async (name, lastName, email, password) => {
     }
     if (!isValidEmail(email)) {
         throw new Error(`Invalid e-mail.`);
+    }
+    if (isEmailAlreadyRegistered(email)) {
+        throw new Error(`E-mail already registered.`);
     }
 
     const hash = await bcrypt.hash(password, 12);
@@ -37,6 +47,16 @@ userService.create = async (name, lastName, email, password) => {
         return doc;
     } catch (err) {
         throw new MongooseError(`Unable to create user: ${err}`);
+    }
+}
+
+
+userService.read = async () => {
+    try {
+        const doc = await User.find();
+        return doc;
+    } catch (err) {
+        throw new MongooseError(`Unable to find user: ${err}`);
     }
 }
 
