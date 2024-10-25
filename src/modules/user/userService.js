@@ -71,4 +71,14 @@ userService.readById = async (id) => {
 }
 
 
+userService.update = async (id, data) => {
+    try {
+        const doc = await User.updateOne({ _id: id }, data);
+        return doc;
+    } catch (err) {
+        throw new MongooseError(`Unable to update user: ${err}`);
+    }
+}
+
+
 export default userService;
