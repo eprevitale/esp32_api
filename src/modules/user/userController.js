@@ -1,3 +1,4 @@
+import { isValidObjectId } from "mongoose";
 import userService from "./userService.js";
 
 // -------------------------------------------------------------------------- //
@@ -54,7 +55,21 @@ userController.read = async (req, res) => {
 
 
 userController.readById = async (req, res) => {
+    const { id } = req.params;
 
+    if (!isValidObjectId(id)) {
+        return res.status(422).json({ msg: "Invalid ID." });
+    }
+
+    try {
+        const doc = await userService.readById(id);
+        if (!doc) {
+            return res.status(404).json({ msg: "User not found." });
+        }
+        return res.status(200).json({ doc });
+    } catch (err) {
+        return res.status(500).json({ msg: `${err}` });
+    }
 }
 
 

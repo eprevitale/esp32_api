@@ -56,6 +56,16 @@ userService.read = async () => {
         const doc = await User.find();
         return doc;
     } catch (err) {
+        throw new MongooseError(`Unable to find users: ${err}`);
+    }
+}
+
+
+userService.readById = async (id) => {
+    try {
+        const doc = await User.findById(id);
+        return doc;
+    } catch (err) {
         throw new MongooseError(`Unable to find user: ${err}`);
     }
 }
