@@ -18,6 +18,14 @@ userService.isEmailAlreadyRegistered = async (email) => {
 }
 
 
+// Auxiliary function
+userService.changePassword = async (id, new_password) => {
+    const hash = await bcrypt.hash(new_password, 12);
+    const doc = await User.updateOne({ _id: id }, { password: hash });
+    return doc;
+}
+
+
 userService.create = async (name, lastName, email, password) => {
 
     if (!isValidName(name)) {
@@ -73,8 +81,18 @@ userService.readById = async (id) => {
 
 userService.update = async (id, data) => {
     try {
-        const doc = await User.updateOne({ _id: id }, data);
-        return doc;
+        const { password } = data;
+
+        if (password) {
+            const hash = await bcrypt.hash(password, 12);
+            data = {
+                ...data,
+                password: hash
+            }
+        }
+
+        await User.findByIdAndUpdate(id, data);
+        return await User.findById(id);
     } catch (err) {
         throw new MongooseError(`Unable to update user: ${err}`);
     }

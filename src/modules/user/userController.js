@@ -75,19 +75,25 @@ userController.readById = async (req, res) => {
 
 userController.update = async (req, res) => {
     const { id } = req.params;
-    const { data } = req.body;
-    const { name, lastName, email } = data;
+    const { name, lastName, email, password } = req.body;
 
     if(!isValidObjectId(id)) {
         return res.status(422).json({ msg: "Invalid ID." });
     }
-    if (!name && !lastName && !email) {
+    if (!name && !lastName && !email && !password) {
         return res.status(422).json({ msg: "Data to update is required!" });
     }
 
+    const data = {
+        name: name,
+        lastName: lastName,
+        email: email,
+        password: password
+    };
+
     try {
         const doc = await userService.update(id, data);
-        return res.status(200).json({ doc })
+        return res.status(200).json({ doc });
     } catch (err) {
         return res.status(500).send({ msg: `${err}`});
     }
