@@ -77,7 +77,7 @@ userController.update = async (req, res) => {
     const { id } = req.params;
     const { name, lastName, email, password } = req.body;
 
-    if(!isValidObjectId(id)) {
+    if (!isValidObjectId(id)) {
         return res.status(422).json({ msg: "Invalid ID." });
     }
     if (!name && !lastName && !email && !password) {
@@ -101,7 +101,18 @@ userController.update = async (req, res) => {
 
 
 userController.delete = async (req, res) => {
+    const { id } = req.params;
 
+    if (!isValidObjectId(id)) {
+        return res.status(422).json({ msg: "Invalid ID." });
+    }
+
+    try {
+        const doc = await userService.delete(id);
+        return res.status(200).json(doc);
+    } catch (err) {
+        return res.status(500).json({ msg: `${err}` });
+    }
 }
 
 

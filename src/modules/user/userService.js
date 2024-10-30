@@ -99,4 +99,14 @@ userService.update = async (id, data) => {
 }
 
 
+userService.delete = async (id) => {
+    try {
+        const doc = await User.findByIdAndDelete(id);
+        return doc;
+    } catch (err) {
+        throw new MongooseError(`Unable to delete user: ${err}`);
+    }
+}
+
+
 export default userService;
