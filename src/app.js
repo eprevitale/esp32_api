@@ -7,7 +7,7 @@ import './config/db.js'
 // Configs
 // --------------------------------------------
 
-const { HOSTNAME, PORT } = env;
+const PORT = env.PORT || 3000;
 
 const app = express();
 
@@ -29,6 +29,9 @@ app.use('/', apiRoutesV1);
 // --------------------------------------------
 // Server
 // --------------------------------------------
-app.listen(PORT, HOSTNAME, () => {
-    console.log(`Server running at http://${HOSTNAME}:${PORT}/`);
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}/`);
 })
+
+
+export default app;
