@@ -47,7 +47,7 @@ userController.read = async (req, res) => {
         if (!doc) {
             return res.status(404).json({ msg: "User not found." });
         }
-        return res.status(200).json({ doc });
+        return res.status(200).json( doc );
     } catch (err) {
         return res.status(500).json({ msg: `${err}` });
     }
@@ -66,7 +66,7 @@ userController.readById = async (req, res) => {
         if (!doc) {
             return res.status(404).json({ msg: "User not found." });
         }
-        return res.status(200).json({ doc });
+        return res.status(200).json( doc );
     } catch (err) {
         return res.status(500).json({ msg: `${err}` });
     }
@@ -93,7 +93,7 @@ userController.update = async (req, res) => {
 
     try {
         const doc = await userService.update(id, data);
-        return res.status(200).json({ doc });
+        return res.status(200).json( doc );
     } catch (err) {
         return res.status(500).send({ msg: `${err}`});
     }
@@ -109,7 +109,7 @@ userController.delete = async (req, res) => {
 
     try {
         const doc = await userService.delete(id);
-        return res.status(200).json(doc);
+        return res.status(200).json( doc );
     } catch (err) {
         return res.status(500).json({ msg: `${err}` });
     }

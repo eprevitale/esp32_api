@@ -61,7 +61,7 @@ userService.create = async (name, lastName, email, password) => {
 
 userService.read = async () => {
     try {
-        const doc = await User.find();
+        const doc = await User.find({}, '-password');
         return doc;
     } catch (err) {
         throw new MongooseError(`Unable to find users: ${err}`);
@@ -71,7 +71,7 @@ userService.read = async () => {
 
 userService.readById = async (id) => {
     try {
-        const doc = await User.findById(id);
+        const doc = await User.findById(id, '-password');
         return doc;
     } catch (err) {
         throw new MongooseError(`Unable to find user: ${err}`);
