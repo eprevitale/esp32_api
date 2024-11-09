@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import env from './config.js';
-import './config/db.js'
+import env from './src/config.js';
+import './src/config/db.js'
 
 // --------------------------------------------
 // Configs
@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({
 // --------------------------------------------
 // Routing
 // --------------------------------------------
-import apiRoutesV1 from './config/apiRoutesV1.js';
+import apiRoutesV1 from './src/config/apiRoutesV1.js';
 
 // Set routes
 app.use('/', apiRoutesV1);
