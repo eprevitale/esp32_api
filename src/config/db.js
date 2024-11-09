@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import env from '../config.js';
-import SaveOptions from "mongoose/lib/options/saveOptions.js";
 
 const { MONGO_URL, MONGO_DB_NAME, MONGO_COLLECTION_NAME } = env;
 
@@ -11,7 +10,7 @@ db.on('open', () => { console.log("Successfully connected to database!"); });
 db.on('error', err => { console.error(`Database error: ${err}`); });
 db.on('disconnecting', () => { console.log("Disconnecting from database...") });
 db.on('disconnected', () => { console.log("Disconnected from database.") });
-db.on('reconnected', () => { console.log("Reconnected to database.") });
+db.on('reconnected', () => { console.log("Reconnecting...") });
 db.on('close', () => { console.log("Connection closed.") });
 
 let options = {};
