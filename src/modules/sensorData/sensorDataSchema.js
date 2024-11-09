@@ -2,12 +2,11 @@ import { Schema } from "mongoose";
 
 const sensorDataSchema = new Schema(
     {
-        timestamp: Date,         // time (ISO || Unix timestamp)
-        sensorId: Number,        // sensor ID
-        temperature: Number,     // temperature
-        level: Number,           // level
-        flowRate: Number,        // flow rate
-        volume: Number           // volume
+        rpm_engine_1: Number,
+        rpm_engine_2: Number,
+        volume: Number,
+        flow_rate: Number,
+        temperature: Number
     },
     {
         timestamps: true
