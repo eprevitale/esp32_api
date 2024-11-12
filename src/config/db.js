@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import env from '../config.js';
+import env from '../../config.js';
 
 const { MONGO_URL, MONGO_DB_NAME, MONGO_COLLECTION_NAME } = env;
 

@@ -11,15 +11,23 @@ const sensorDataController = {}
 // GET
 sensorDataController.read = async (req, res) => {
     
-    const doc = await sensorDataService.read();
+    try {
+        const doc = await sensorDataService.read();
+        
+        if(!doc) {
+            return res.status(404).json({ msg: "No registries found." });
+        }
 
-    if(!doc) {
-        return res.status(404).json({ msg: "No registries found." });
+        const info = {
+            doc: doc
+        }
+
+        return res.render("sensorData", info);
+
+    } catch (err) {
+        return res.status(500).json({ error: `${err.msg}` });
     }
 
-    res.status(200).json(doc);
-
-    // TODO try-catch
 }
 
 

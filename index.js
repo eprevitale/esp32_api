@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import env from './src/config.js';
+import env from './config.js';
 import './src/config/db.js'
 
 // --------------------------------------------
@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.set('view engine', 'ejs');
 
 
 // --------------------------------------------
