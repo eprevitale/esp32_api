@@ -92,7 +92,7 @@ userService.update = async (id, data) => {
         }
 
         await User.findByIdAndUpdate(id, data);
-        return await User.findById(id);
+        return await User.findById(id, '-password');
     } catch (err) {
         throw new MongooseError(`Unable to update user: ${err}`);
     }

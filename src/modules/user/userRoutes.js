@@ -1,5 +1,6 @@
 import { Router } from "express";
 import userController from './userController.js';
+import authMiddleware from "../auth/authMiddleware.js";
 
 const router = Router();
 
@@ -12,7 +13,7 @@ router.post('/', userController.create);
 
 router.get('/', userController.read);
 
-router.get('/:id', userController.readById);
+router.get('/:id', authMiddleware.isUserAuthenticated, userController.readById);
 
 router.patch('/:id', userController.update);
 
