@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/sensorData.css" rel="stylesheet" type="text/css" />
     <title>Dados do sensor</title>
 </head>
 <body>
@@ -25,11 +26,11 @@
             <tbody>
                 <% for (i = doc.length - 1; i >= 0; i--) { %>
                 <tr>
-                    <td><%= doc[i].rpm_engine_1 %></td>
-                    <td><%= doc[i].rpm_engine_2 %></td>
-                    <td><%= doc[i].volume %></td>
-                    <td><%= doc[i].flow_rate %></td>
-                    <td><%= doc[i].temperature %></td>
+                    <td><%= doc[i].rpm_engine_1 != "-1" ? doc[i].rpm_engine_1 : "-" %></td>
+                    <td><%= doc[i].rpm_engine_2 != "-1" ? doc[i].rpm_engine_2 : "-" %></td>
+                    <td><%= doc[i].volume != "-1" ? doc[i].volume : "-" %></td>
+                    <td><%= doc[i].flow_rate != "-1" ? doc[i].flow_rate : "-" %></td>
+                    <td><%= doc[i].temperature != "-1" ? doc[i].temperature : "-" %></td>
                 </tr>
                 <% } %>
             </tbody>
